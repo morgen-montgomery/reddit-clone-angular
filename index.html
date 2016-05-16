@@ -1,10 +1,42 @@
 <!DOCTYPE html>
-<html ng-app="">
+<html ng-app="redditClone">
   <head>
     <meta charset="utf-8">
     <title>Reddit Clone</title>
   </head>
   <body>
+    <form ng-submit="submit()" ng-controller="PostFields">
+      <h3>Reddit Form</h3>
+      Title of Post:<input ng-model="view.title" type="text" placeholder="Title of post..." required>
+      Author of Post:<input ng-model="view.author" type="text" placeholder="Author of post..." required>
+      Image URL:<input ng-model="view.imgTag" type="text" placeholder="Image URL goes here..." required>
+      Description:<input ng-model="view.description" type="text" placeholder="Post description here..." required>
+      <input type="submit" id="submit" value="Submit">
+      <button ng-click="reset()" type="button" name="button">Refresh Form</button>
+    </form>
+    <div class="main" ng-controller="MainController">
+      <h1>{{ title }}</h1>
+      <div ng-repeat="post in posts" class="col-md-10">
+        <img ng-src='{{ post.img }}'>
+        <p class="title">{{ post.title }}</p>
+        <p class="author">{{ post.author }}</p>
+        <p class="description">{{ post.desc }}</p>
+        <p class="pubdate">{{ post.pubdate | date }}</p>
+        <div class="rating">
+          <p class="likes" ng-click="plusOne($index)">{{ post.likes }}</p>
+        </div>
+
+      </div>
+
+
+    </div>
+    <pre>
+      post={{ post }}
+    </pre>
+    <ul>
+      <li ng-repeat="post in PostFields"></li>
+    </ul>
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js" type="text/javascript"></script>
     <script src="app.js"></script>
